@@ -211,21 +211,11 @@ public class AuthController {
 //  }
 
 
-  // @PostMapping("/forgot-password")
-  // public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
-  //   forgotPasswordService.forgotPassword(request.getEmail());
-  //   return ResponseEntity.ok("OTP sent to your email.");
-  // }
   @PostMapping("/forgot-password")
-public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
-    try {
-        forgotPasswordService.forgotPassword(request.getEmail());
-        return ResponseEntity.ok("OTP sent to your email.");
-    } catch (RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
-}
-
+  public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+    forgotPasswordService.forgotPassword(request.getEmail());
+    return ResponseEntity.ok("OTP sent to your email.");
+  }
   @PostMapping("/reset-password")
   public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
     forgotPasswordService.resetPassword(request.getEmail(), request.getOtp(), request.getNewPassword());
